@@ -3,10 +3,10 @@
 $wgExtensionCredits['tripsitextension'][] = array(
   'path' => __FILE__,
   'name' => 'TripSit Mediawiki Extension',
-  'description' => 'Pull information from TripSit factsheets into a wiki',
+  'description' => 'Pull information from TripSit factsheets into a wiki page',
   'version' => '0.0.1',
   'author' => 'reality',
-  'url' => 'test'
+  'url' => 'https://github.com/TripSit/tripsit_mediawiki'
 );
 
 $wgExtensionMessagesFiles['TripsitExtension'] = __DIR__ . '/TripsitExtension.i18n.php';
@@ -31,11 +31,9 @@ class TripsitExtension {
   }
 
   function renderDose($parser, $name='') {
-    $parser->disableCache();
-
     $drug = self::getDrug($name);
 
-		$output = '';
+    $output = '';
 
     foreach($drug->formatted_dose as $roa => $dose_expression) {
       $output .= "{| class=\"wikitable\"\n";

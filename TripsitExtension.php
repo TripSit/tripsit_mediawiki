@@ -18,14 +18,14 @@ class TripsitExtension {
   }
 
   function getDrug($name) {
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_URL, 'http://drugs.tripsit.me/raw/'.$name);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type:application/json'));
-	curl_setopt($ch, CURLOPT_HEADER, false);
-	curl_setopt($ch, CURLOPT_POST, false);
-	$result = curl_exec($ch);
-	curl_close($ch);
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_URL, 'http://drugs.tripsit.me/raw/'.$name);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type:application/json'));
+    curl_setopt($ch, CURLOPT_HEADER, false);
+    curl_setopt($ch, CURLOPT_POST, false);
+    $result = curl_exec($ch);
+    curl_close($ch);
 
     return json_decode($result);
   }
@@ -45,7 +45,7 @@ class TripsitExtension {
       $output .= "|}\n";
     }
 
-	$output .= 'Dosages from [http://drugs.tripsit.me/'.$name.' TripSit Factsheets]';
+    $output .= 'Dosages from [http://drugs.tripsit.me/'.$name.' TripSit Factsheets]';
 
     return $output;
   }

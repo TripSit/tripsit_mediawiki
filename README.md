@@ -1,7 +1,7 @@
 ## Installation
 
 Simply clone this repository into the extensions/ subdirectory of your mediawiki installation,
-then add the following to your LocalSettings.php:
+with the directory name TripsitExtension (or change it if you like), then add the following to your LocalSettings.php:
 
 ```php
 require_once "$IP/extensions/TripsitExtension/TripsitExtension.php";

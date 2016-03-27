@@ -17,21 +17,25 @@ class TripsitExtension {
     $parser->setFunctionHook('tdose', 'TripsitExtension::renderDose');
   }
 
-  function renderDose($parser, $param1='') {
-    $parser->disableCache();
-
+  function getDrug($name) {
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_URL, 'http://drugs.tripsit.me/raw/'.$param1);
+	curl_setopt($ch, CURLOPT_URL, 'http://drugs.tripsit.me/raw/'.$name);
 	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type:application/json'));
 	curl_setopt($ch, CURLOPT_HEADER, false);
 	curl_setopt($ch, CURLOPT_POST, false);
 	$result = curl_exec($ch);
 	curl_close($ch);
 
-    $drug = json_decode($result);
+    return json_decode($result);
+  }
 
-	$output = '';
+  function renderDose($parser, $name='') {
+    $parser->disableCache();
+
+    $drug = self::getDrug($name);
+
+		$output = '';
 
     foreach($drug->formatted_dose as $roa => $dose_expression) {
       $output .= "{| class=\"wikitable\"\n";
@@ -42,6 +46,8 @@ class TripsitExtension {
       }
       $output .= "|}\n";
     }
+
+	$output .= 'Dosages from [http://drugs.tripsit.me/'.$name.' TripSit Factsheets]';
 
     return $output;
   }
